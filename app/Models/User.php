@@ -27,6 +27,23 @@ class User extends Authenticatable
         return [
             'email_verified_at' => 'datetime',
             'password' => 'hashed',
+            'is_active' => 'boolean',
+            'must_change_password' => 'boolean',
         ];
+    }
+
+    public function isActive(): bool
+    {
+        return $this->is_active;
+    }
+
+    public function mustChangePassword(): bool
+    {
+        return $this->must_change_password;
+    }
+
+    public function scopeActive($query)
+    {
+        return $query->where('is_active', true);
     }
 }
