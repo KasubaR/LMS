@@ -1,0 +1,80 @@
+{
+  "node_modules/@phosphor-icons/web/src/fill/Phosphor-Fill.svg": {
+    "file": "assets/Phosphor-Fill-BofDnXwa.svg",
+    "src": "node_modules/@phosphor-icons/web/src/fill/Phosphor-Fill.svg"
+  },
+  "node_modules/@phosphor-icons/web/src/fill/Phosphor-Fill.ttf": {
+    "file": "assets/Phosphor-Fill-N9gYSHy0.ttf",
+    "src": "node_modules/@phosphor-icons/web/src/fill/Phosphor-Fill.ttf"
+  },
+  "node_modules/@phosphor-icons/web/src/fill/Phosphor-Fill.woff": {
+    "file": "assets/Phosphor-Fill-CS2zOYDV.woff",
+    "src": "node_modules/@phosphor-icons/web/src/fill/Phosphor-Fill.woff"
+  },
+  "node_modules/@phosphor-icons/web/src/fill/Phosphor-Fill.woff2": {
+    "file": "assets/Phosphor-Fill-D4CDmGRg.woff2",
+    "src": "node_modules/@phosphor-icons/web/src/fill/Phosphor-Fill.woff2"
+  },
+  "node_modules/@phosphor-icons/web/src/regular/Phosphor.svg": {
+    "file": "assets/Phosphor-BXRFlF4V.svg",
+    "src": "node_modules/@phosphor-icons/web/src/regular/Phosphor.svg"
+  },
+  "node_modules/@phosphor-icons/web/src/regular/Phosphor.ttf": {
+    "file": "assets/Phosphor-CDxgqcPu.ttf",
+    "src": "node_modules/@phosphor-icons/web/src/regular/Phosphor.ttf"
+  },
+  "node_modules/@phosphor-icons/web/src/regular/Phosphor.woff": {
+    "file": "assets/Phosphor-BdqudwT5.woff",
+    "src": "node_modules/@phosphor-icons/web/src/regular/Phosphor.woff"
+  },
+  "node_modules/@phosphor-icons/web/src/regular/Phosphor.woff2": {
+    "file": "assets/Phosphor-DtdjzkpE.woff2",
+    "src": "node_modules/@phosphor-icons/web/src/regular/Phosphor.woff2"
+  },
+  "resources/css/app-form.css": {
+    "file": "assets/app-form-DPLfU64W.css",
+    "name": "app-form",
+    "names": [
+      "app-form.css"
+    ],
+    "src": "resources/css/app-form.css",
+    "isEntry": true
+  },
+  "resources/css/app.css": {
+    "file": "assets/app-DdRZ0Pn2.css",
+    "name": "app",
+    "names": [
+      "app.css"
+    ],
+    "src": "resources/css/app.css",
+    "isEntry": true
+  },
+  "resources/css/nocturne.css": {
+    "file": "assets/nocturne-CiPT9SMc.css",
+    "name": "nocturne",
+    "names": [
+      "nocturne.css"
+    ],
+    "src": "resources/css/nocturne.css",
+    "isEntry": true
+  },
+  "resources/js/app.js": {
+    "file": "assets/app-Czl2XYtt.js",
+    "name": "app",
+    "src": "resources/js/app.js",
+    "isEntry": true,
+    "css": [
+      "assets/app-DToh7jod.css"
+    ],
+    "assets": [
+      "assets/Phosphor-DtdjzkpE.woff2",
+      "assets/Phosphor-BdqudwT5.woff",
+      "assets/Phosphor-CDxgqcPu.ttf",
+      "assets/Phosphor-BXRFlF4V.svg",
+      "assets/Phosphor-Fill-D4CDmGRg.woff2",
+      "assets/Phosphor-Fill-CS2zOYDV.woff",
+      "assets/Phosphor-Fill-N9gYSHy0.ttf",
+      "assets/Phosphor-Fill-BofDnXwa.svg"
+    ]
+  }
+}
