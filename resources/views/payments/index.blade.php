@@ -22,32 +22,52 @@
         @endif
 
         <div class="card elev-sm p-4 sm:p-6">
-            <form method="GET" class="flex flex-wrap gap-3 mb-4 items-end">
-                <div class="flex-1 min-w-[200px]">
-                    <x-input-label for="q" :value="__('Search')" />
-                    <x-text-input id="q" name="q" type="search" class="block mt-1 w-full" :value="request('q')" placeholder="{{ __('Payment #, loan #, customer…') }}" />
-                </div>
-                <div>
-                    <x-input-label for="method" :value="__('Method')" />
-                    <select id="method" name="method" class="input mt-1">
-                        <option value="">{{ __('All methods') }}</option>
-                        @foreach ($methods as $method)
-                            <option value="{{ $method }}" @selected(request('method') === $method)>
-                                {{ __(str_replace('_', ' ', ucfirst($method))) }}
-                            </option>
-                        @endforeach
-                    </select>
-                </div>
-                <div>
-                    <x-input-label for="status" :value="__('Status')" />
-                    <select id="status" name="status" class="input mt-1">
-                        <option value="all" @selected(request('status', 'all') === 'all')>{{ __('All') }}</option>
-                        @foreach ($statuses as $status)
-                            <option value="{{ $status }}" @selected(request('status') === $status)>{{ __(ucfirst($status)) }}</option>
-                        @endforeach
-                    </select>
-                </div>
-                <x-secondary-button type="submit">{{ __('Search') }}</x-secondary-button>
+            @php
+                $activeFilterCount = collect(request()->except('page'))
+                    ->reject(fn ($v, $k) => $v === null || $v === '' || ($k === 'status' && $v === 'all'))
+                    ->count();
+            @endphp
+            <form method="GET" class="list-filters">
+                <details class="list-filters__more" @if ($activeFilterCount) open @endif>
+                    <summary class="list-filters__toggle">
+                        <i class="ph ph-funnel"></i>
+                        {{ __('Search & Filter') }}
+                        @if ($activeFilterCount)
+                            <span class="list-filters__count">{{ $activeFilterCount }}</span>
+                        @endif
+                    </summary>
+
+                    <div class="list-filters__panel">
+                        <div class="list-filters__field list-filters__field--grow">
+                            <x-input-label for="q" :value="__('Search')" />
+                            <x-text-input id="q" name="q" type="search" class="block mt-1 w-full" :value="request('q')" placeholder="{{ __('Payment #, loan #, customer…') }}" />
+                        </div>
+                        <div class="list-filters__field">
+                            <x-input-label for="method" :value="__('Method')" />
+                            <select id="method" name="method" class="input mt-1">
+                                <option value="">{{ __('All methods') }}</option>
+                                @foreach ($methods as $method)
+                                    <option value="{{ $method }}" @selected(request('method') === $method)>
+                                        {{ __(str_replace('_', ' ', ucfirst($method))) }}
+                                    </option>
+                                @endforeach
+                            </select>
+                        </div>
+                        <div class="list-filters__field">
+                            <x-input-label for="status" :value="__('Status')" />
+                            <select id="status" name="status" class="input mt-1">
+                                <option value="all" @selected(request('status', 'all') === 'all')>{{ __('All') }}</option>
+                                @foreach ($statuses as $status)
+                                    <option value="{{ $status }}" @selected(request('status') === $status)>{{ __(ucfirst($status)) }}</option>
+                                @endforeach
+                            </select>
+                        </div>
+                        <div class="list-filters__actions">
+                            <button type="submit" class="btn btn-primary">{{ __('Apply') }}</button>
+                            <a href="{{ route('payments.index') }}" class="btn btn-ghost">{{ __('Clear') }}</a>
+                        </div>
+                    </div>
+                </details>
             </form>
 
             <div class="overflow-x-auto">

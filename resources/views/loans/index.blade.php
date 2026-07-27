@@ -22,64 +22,81 @@
         @endif
 
         <div class="card elev-sm p-4 sm:p-6">
+            @php
+                $activeFilterCount = collect(request()->except('page'))
+                    ->reject(fn ($v, $k) => $v === null || $v === '' || ($k === 'status' && $v === 'all'))
+                    ->count();
+            @endphp
             <form method="GET" class="list-filters">
-                <div class="list-filters__field list-filters__field--grow">
-                    <x-input-label for="q" :value="__('Search')" />
-                    <x-text-input id="q" name="q" type="search" class="block mt-1 w-full" :value="request('q')" placeholder="{{ __('Loan #, name, phone, NRC…') }}" />
-                </div>
+                <details class="list-filters__more" @if ($activeFilterCount) open @endif>
+                    <summary class="list-filters__toggle">
+                        <i class="ph ph-funnel"></i>
+                        {{ __('Search & Filter') }}
+                        @if ($activeFilterCount)
+                            <span class="list-filters__count">{{ $activeFilterCount }}</span>
+                        @endif
+                    </summary>
 
-                <div class="list-filters__field">
-                    <x-input-label for="status" :value="__('Status')" />
-                    <select id="status" name="status" class="input mt-1">
-                        <option value="all" @selected(request('status', 'all') === 'all')>{{ __('All') }}</option>
-                        @foreach ($statuses as $status)
-                            <option value="{{ $status }}" @selected(request('status') === $status)>{{ __(str_replace('_', ' ', ucfirst($status))) }}</option>
-                        @endforeach
-                    </select>
-                </div>
+                    <div class="list-filters__panel">
+                        <div class="list-filters__field list-filters__field--grow">
+                            <x-input-label for="q" :value="__('Search')" />
+                            <x-text-input id="q" name="q" type="search" class="block mt-1 w-full" :value="request('q')" placeholder="{{ __('Loan #, name, phone, NRC…') }}" />
+                        </div>
 
-                <div class="list-filters__field">
-                    <x-input-label for="loan_officer_id" :value="__('Loan officer')" />
-                    <select id="loan_officer_id" name="loan_officer_id" class="input mt-1">
-                        <option value="">{{ __('All officers') }}</option>
-                        @foreach ($officers as $officer)
-                            <option value="{{ $officer->id }}" @selected((string) request('loan_officer_id') === (string) $officer->id)>
-                                {{ $officer->name }}
-                            </option>
-                        @endforeach
-                    </select>
-                </div>
+                        <div class="list-filters__field">
+                            <x-input-label for="status" :value="__('Status')" />
+                            <select id="status" name="status" class="input mt-1">
+                                <option value="all" @selected(request('status', 'all') === 'all')>{{ __('All') }}</option>
+                                @foreach ($statuses as $status)
+                                    <option value="{{ $status }}" @selected(request('status') === $status)>{{ __(str_replace('_', ' ', ucfirst($status))) }}</option>
+                                @endforeach
+                            </select>
+                        </div>
 
-                <div class="list-filters__field">
-                    <x-input-label for="date_from" :value="__('Due from')" />
-                    <x-text-input id="date_from" name="date_from" type="date" class="block mt-1 w-full" :value="request('date_from')" />
-                </div>
+                        <div class="list-filters__field">
+                            <x-input-label for="loan_officer_id" :value="__('Loan officer')" />
+                            <select id="loan_officer_id" name="loan_officer_id" class="input mt-1">
+                                <option value="">{{ __('All officers') }}</option>
+                                @foreach ($officers as $officer)
+                                    <option value="{{ $officer->id }}" @selected((string) request('loan_officer_id') === (string) $officer->id)>
+                                        {{ $officer->name }}
+                                    </option>
+                                @endforeach
+                            </select>
+                        </div>
 
-                <div class="list-filters__field">
-                    <x-input-label for="date_to" :value="__('Due to')" />
-                    <x-text-input id="date_to" name="date_to" type="date" class="block mt-1 w-full" :value="request('date_to')" />
-                </div>
+                        <div class="list-filters__field">
+                            <x-input-label for="date_from" :value="__('Due from')" />
+                            <x-text-input id="date_from" name="date_from" type="date" class="block mt-1 w-full" :value="request('date_from')" />
+                        </div>
 
-                <div class="list-filters__field">
-                    <x-input-label for="amount_min" :value="__('Min principal')" />
-                    <div class="app-form__affix">
-                        <span class="app-form__affix-label" aria-hidden="true">{{ currency_symbol() }}</span>
-                        <input id="amount_min" name="amount_min" type="number" step="0.01" min="0" class="input block w-full" value="{{ request('amount_min') }}" />
+                        <div class="list-filters__field">
+                            <x-input-label for="date_to" :value="__('Due to')" />
+                            <x-text-input id="date_to" name="date_to" type="date" class="block mt-1 w-full" :value="request('date_to')" />
+                        </div>
+
+                        <div class="list-filters__field">
+                            <x-input-label for="amount_min" :value="__('Min principal')" />
+                            <div class="app-form__affix">
+                                <span class="app-form__affix-label" aria-hidden="true">{{ currency_symbol() }}</span>
+                                <input id="amount_min" name="amount_min" type="number" step="0.01" min="0" class="input block w-full" value="{{ request('amount_min') }}" />
+                            </div>
+                        </div>
+
+                        <div class="list-filters__field">
+                            <x-input-label for="amount_max" :value="__('Max principal')" />
+                            <div class="app-form__affix">
+                                <span class="app-form__affix-label" aria-hidden="true">{{ currency_symbol() }}</span>
+                                <input id="amount_max" name="amount_max" type="number" step="0.01" min="0" class="input block w-full" value="{{ request('amount_max') }}" />
+                            </div>
+                        </div>
+
+                        <div class="list-filters__actions">
+                            <button type="submit" class="btn btn-primary">{{ __('Apply') }}</button>
+                            <a href="{{ route('loans.index') }}" class="btn btn-ghost">{{ __('Clear') }}</a>
+                        </div>
                     </div>
-                </div>
-
-                <div class="list-filters__field">
-                    <x-input-label for="amount_max" :value="__('Max principal')" />
-                    <div class="app-form__affix">
-                        <span class="app-form__affix-label" aria-hidden="true">{{ currency_symbol() }}</span>
-                        <input id="amount_max" name="amount_max" type="number" step="0.01" min="0" class="input block w-full" value="{{ request('amount_max') }}" />
-                    </div>
-                </div>
-
-                <div class="list-filters__actions">
-                    <button type="submit" class="btn btn-primary">{{ __('Apply') }}</button>
-                    <a href="{{ route('loans.index') }}" class="btn btn-ghost">{{ __('Clear') }}</a>
-                </div>
+                </details>
             </form>
 
             <div class="overflow-x-auto">

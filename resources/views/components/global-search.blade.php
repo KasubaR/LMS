@@ -1,38 +1,63 @@
 @canany(['view customers', 'view loans'])
 <div
-    class="global-search"
-    x-data="globalSearch({
-        suggestUrl: {{ Js::from(route('search.suggest')) }},
-        resultsUrl: {{ Js::from(route('search')) }},
-        initialQuery: {{ Js::from(request('q', '')) }},
-    })"
-    @keydown.escape.window="close()"
+    x-data="{ mobileExpanded: false }"
+    @keydown.escape.window="mobileExpanded = false"
+    @click.outside="mobileExpanded = false"
 >
-    <form class="global-search__form" method="GET" :action="resultsUrl" @submit="onSubmit">
-        <label class="sr-only" for="global-search-q">{{ __('Search') }}</label>
-        <i class="ph ph-magnifying-glass global-search__icon" aria-hidden="true"></i>
-        <input
-            id="global-search-q"
-            name="q"
-            type="search"
-            class="global-search__input"
-            placeholder="{{ __('Search name, phone, NRC, loan…') }}"
-            autocomplete="off"
-            x-model="query"
-            @input.debounce.250ms="fetchSuggestions()"
-            @focus="open = query.trim().length >= 2"
-            @keydown.arrow-down.prevent="move(1)"
-            @keydown.arrow-up.prevent="move(-1)"
-            @keydown.enter="onEnter($event)"
-        />
-    </form>
+    <button
+        type="button"
+        class="btn btn-icon btn-secondary sm:!hidden"
+        @click="mobileExpanded = true"
+        aria-label="{{ __('Search') }}"
+    >
+        <i class="ph ph-magnifying-glass text-lg"></i>
+    </button>
 
     <div
-        class="global-search__panel"
-        x-show="open && (loading || hasResults || query.trim().length >= 2)"
-        x-cloak
-        @mousedown.outside="close()"
+        class="global-search sm:flex"
+        :class="{ 'hidden': !mobileExpanded, 'flex global-search--expanded': mobileExpanded }"
+        x-data="globalSearch({
+            suggestUrl: {{ Js::from(route('search.suggest')) }},
+            resultsUrl: {{ Js::from(route('search')) }},
+            initialQuery: {{ Js::from(request('q', '')) }},
+        })"
+        x-effect="mobileExpanded && $nextTick(() => $refs.globalSearchInput.focus())"
+        @keydown.escape="close()"
     >
+        <form class="global-search__form" method="GET" :action="resultsUrl" @submit="onSubmit">
+            <label class="sr-only" for="global-search-q">{{ __('Search') }}</label>
+            <i class="ph ph-magnifying-glass global-search__icon" aria-hidden="true"></i>
+            <input
+                id="global-search-q"
+                x-ref="globalSearchInput"
+                name="q"
+                type="search"
+                class="global-search__input"
+                placeholder="{{ __('Search name, phone, NRC, loan…') }}"
+                autocomplete="off"
+                x-model="query"
+                @input.debounce.250ms="fetchSuggestions()"
+                @focus="open = query.trim().length >= 2"
+                @keydown.arrow-down.prevent="move(1)"
+                @keydown.arrow-up.prevent="move(-1)"
+                @keydown.enter="onEnter($event)"
+            />
+            <button
+                type="button"
+                class="global-search__close"
+                @click="mobileExpanded = false"
+                aria-label="{{ __('Close search') }}"
+            >
+                <i class="ph ph-x" aria-hidden="true"></i>
+            </button>
+        </form>
+
+        <div
+            class="global-search__panel"
+            x-show="open && (loading || hasResults || query.trim().length >= 2)"
+            x-cloak
+            @mousedown.outside="close()"
+        >
         <template x-if="loading">
             <p class="global-search__empty">{{ __('Searching…') }}</p>
         </template>
@@ -82,6 +107,7 @@
         >
             {{ __('View all results') }}
         </a>
+        </div>
     </div>
 </div>
 @endcanany

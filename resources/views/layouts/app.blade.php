@@ -19,10 +19,10 @@
             <div class="flex-1 min-w-0 flex flex-col lg:pl-0">
                 <header class="sticky top-0 z-10 h-16 flex-none flex items-center justify-between gap-2 sm:gap-4 px-3 sm:px-6 border-b border-divider bg-bg">
                     <div class="flex items-center gap-2 sm:gap-3 min-w-0">
-                        <button class="lg:hidden btn btn-secondary btn-icon" @click="sidebarOpen = !sidebarOpen" aria-label="{{ __('Toggle menu') }}">
+                        <button class="lg:!hidden btn btn-secondary btn-icon" @click="sidebarOpen = !sidebarOpen" aria-label="{{ __('Toggle menu') }}">
                             <i class="ph ph-list text-lg"></i>
                         </button>
-                        <div class="min-w-0 truncate">
+                        <div class="hidden sm:block min-w-0 truncate">
                             {{ $header ?? '' }}
                         </div>
                     </div>
@@ -30,7 +30,7 @@
                     <div class="flex items-center gap-2 sm:gap-3 flex-none min-w-0">
                         <x-global-search />
 
-                        <x-theme-toggle />
+                        <x-theme-toggle class="!hidden sm:!inline-flex" />
 
                         <x-dropdown align="right" width="72">
                             <x-slot name="trigger">
@@ -44,7 +44,7 @@
                             </x-slot>
                         </x-dropdown>
 
-                        <x-dropdown align="right" width="56">
+                        <x-dropdown align="right" width="64">
                             <x-slot name="trigger">
                                 <button class="flex items-center gap-2 rounded-md px-1 py-1 hover-surface transition-colors">
                                     <div class="w-8 h-8 rounded-full bg-accent-800 text-accent-100 flex items-center justify-center text-xs font-heading font-medium flex-none">
@@ -58,9 +58,24 @@
                                 </button>
                             </x-slot>
                             <x-slot name="content">
+                                <div class="px-3 py-2 sm:hidden">
+                                    <div class="text-sm">{{ auth()->user()->name }}</div>
+                                    <div class="text-xs text-muted-500">{{ auth()->user()->roles->first()?->name }}</div>
+                                </div>
+
                                 <x-dropdown-link :href="route('profile.edit')">
                                     <i class="ph ph-user"></i> {{ __('Profile') }}
                                 </x-dropdown-link>
+
+                                <button
+                                    type="button"
+                                    x-data="themeToggle"
+                                    @click="toggle()"
+                                    class="flex items-center gap-2 w-full px-3 py-2 rounded-sm text-start text-sm text-ink hover-surface transition-colors"
+                                >
+                                    <i class="ph" :class="isDark ? 'ph-sun' : 'ph-moon'"></i>
+                                    <span x-text="isDark ? '{{ __('Light mode') }}' : '{{ __('Dark mode') }}'"></span>
+                                </button>
 
                                 <form method="POST" action="{{ route('logout') }}">
                                     @csrf
