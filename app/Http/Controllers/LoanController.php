@@ -293,7 +293,7 @@ class LoanController extends Controller
                 'duration_months' => config('lms.default_duration_months', 1),
                 'frequency' => config('lms.default_frequency', 'monthly'),
                 'interest_type' => config('lms.default_interest_type', 'flat'),
-                'penalty_type' => config('lms.default_penalty_type', 'daily_percent'),
+                'penalty_type' => config('lms.default_penalty_type', 'fixed'),
                 'penalty_value' => config('lms.default_penalty_value', 0),
                 'start_date' => now()->toDateString(),
             ],

@@ -21,7 +21,7 @@ return new class extends Migration
             $table->date('start_date');
             $table->date('due_date');
             $table->decimal('processing_fee', 14, 2)->default(0);
-            $table->string('penalty_type')->default('daily_percent');
+            $table->string('penalty_type')->default('fixed');
             $table->decimal('penalty_value', 14, 2)->default(0);
             $table->string('status')->default('draft')->index();
             $table->text('notes')->nullable();

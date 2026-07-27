@@ -19,7 +19,7 @@ return [
 
     'default_interest_type' => env('LOAN_DEFAULT_INTEREST_TYPE', 'flat'),
 
-    'default_penalty_type' => env('LOAN_DEFAULT_PENALTY_TYPE', 'daily_percent'),
+    'default_penalty_type' => env('LOAN_DEFAULT_PENALTY_TYPE', 'fixed'),
 
     'default_penalty_value' => (float) env('LOAN_DEFAULT_PENALTY_VALUE', 0),
 

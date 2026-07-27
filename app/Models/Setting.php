@@ -32,7 +32,7 @@ class Setting extends Model
             'business_name' => config('app.name'),
             'loan_number_prefix' => config('lms.loan_number_prefix', 'LN'),
             'default_interest_rate' => config('lms.default_interest_rate', 40),
-            'default_penalty_type' => config('lms.default_penalty_type', 'daily_percent'),
+            'default_penalty_type' => config('lms.default_penalty_type', 'fixed'),
             'default_penalty_value' => config('lms.default_penalty_value', 0),
             'grace_period_days' => config('lms.grace_period_days', 0),
             'currency_code' => config('lms.currency_code', 'ZMW'),
