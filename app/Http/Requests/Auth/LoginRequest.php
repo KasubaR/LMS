@@ -2,6 +2,8 @@
 
 namespace App\Http\Requests\Auth;
 
+use App\Models\LoginHistory;
+use App\Services\AuditLogger;
 use Illuminate\Auth\Events\Lockout;
 use Illuminate\Contracts\Validation\ValidationRule;
 use Illuminate\Foundation\Http\FormRequest;
@@ -42,15 +44,53 @@ class LoginRequest extends FormRequest
     {
         $this->ensureIsNotRateLimited();
 
+        $email = $this->string('email');
+        $context = AuditLogger::requestContext();
+
         if (! Auth::attempt($this->only('email', 'password'), $this->boolean('remember'))) {
             RateLimiter::hit($this->throttleKey());
+
+            LoginHistory::create([
+                'user_id' => null,
+                'email' => $email,
+                'failed' => true,
+                'failure_reason' => 'invalid_credentials',
+                'login_at' => now(),
+                'ip_address' => $context['ip_address'],
+                'browser' => $context['browser'],
+                'device' => $context['device'],
+                'user_agent' => $context['user_agent'],
+            ]);
+
+            AuditLogger::log('Failed Logins', null, [
+                'email' => $email,
+                'failure_reason' => 'invalid_credentials',
+            ], 'Auth');
 
             throw ValidationException::withMessages([
                 'email' => trans('auth.failed'),
             ]);
         }
 
-        if (! Auth::user()->isActive()) {
+        $user = Auth::user();
+        if (! $user->isActive()) {
+            LoginHistory::create([
+                'user_id' => $user?->id,
+                'email' => $email,
+                'failed' => true,
+                'failure_reason' => 'account_disabled',
+                'login_at' => now(),
+                'ip_address' => $context['ip_address'],
+                'browser' => $context['browser'],
+                'device' => $context['device'],
+                'user_agent' => $context['user_agent'],
+            ]);
+
+            AuditLogger::log('Failed Logins', null, [
+                'email' => $email,
+                'failure_reason' => 'account_disabled',
+            ], 'Auth');
+
             Auth::logout();
 
             throw ValidationException::withMessages([
@@ -59,6 +99,23 @@ class LoginRequest extends FormRequest
         }
 
         RateLimiter::clear($this->throttleKey());
+
+        $loginHistory = LoginHistory::create([
+            'user_id' => $user->id,
+            'email' => $email,
+            'failed' => false,
+            'login_at' => now(),
+            'ip_address' => $context['ip_address'],
+            'browser' => $context['browser'],
+            'device' => $context['device'],
+            'user_agent' => $context['user_agent'],
+        ]);
+
+        $this->session()->put('login_history_id', $loginHistory->id);
+
+        AuditLogger::log('Login', null, [
+            'email' => $email,
+        ], 'Auth');
     }
 
     /**

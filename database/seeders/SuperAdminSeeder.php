@@ -13,7 +13,7 @@ class SuperAdminSeeder extends Seeder
         $email = config('lms.super_admin.email');
         $password = config('lms.super_admin.password');
 
-        $user = User::firstOrCreate(
+        $user = User::updateOrCreate(
             ['email' => $email],
             [
                 'name' => 'Super Admin',

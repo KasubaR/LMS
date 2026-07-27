@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Admin\StoreRoleRequest;
 use App\Http\Requests\Admin\UpdateRoleRequest;
+use App\Services\AuditLogger;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\View\View;
 use Spatie\Permission\Models\Permission;
@@ -44,8 +45,15 @@ class RoleController extends Controller
 
     public function update(UpdateRoleRequest $request, Role $role): RedirectResponse
     {
+        $oldPermissions = $role->permissions()->pluck('name')->values()->all();
+
         $role->update(['name' => $request->validated('name')]);
         $role->syncPermissions($request->validated('permissions', []));
+
+        AuditLogger::log('Role Updated', $role, [
+            'permissions_old' => $oldPermissions,
+            'permissions_new' => $request->validated('permissions', []),
+        ], 'Roles');
 
         return redirect()->route('admin.roles.index')->with('status', "Role \"{$role->name}\" updated.");
     }

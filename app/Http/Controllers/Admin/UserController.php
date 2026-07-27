@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\Admin\StoreUserRequest;
 use App\Http\Requests\Admin\UpdateUserRequest;
 use App\Models\User;
+use App\Services\AuditLogger;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
@@ -55,6 +56,8 @@ class UserController extends Controller
 
         $user->assignRole($request->validated('role'));
 
+        AuditLogger::log('User Created', $user, [], 'Users');
+
         return redirect()
             ->route('admin.users.index')
             ->with('generated_password', $password)
@@ -102,6 +105,8 @@ class UserController extends Controller
             'password' => Hash::make($password),
             'must_change_password' => true,
         ])->save();
+
+        AuditLogger::log('Password Changed', $user, [], 'Users');
 
         return redirect()
             ->route('admin.users.index')

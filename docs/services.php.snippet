@@ -1,0 +1,12 @@
+<?php
+// Add this array to your existing config/services.php file
+// inside the main return [ ... ] array.
+
+'lenco' => [
+    'secret_key'   => env('LENCO_SECRET_KEY'),
+    'public_key'   => env('LENCO_PUBLIC_KEY'),
+    'base_url'     => env('LENCO_BASE_URL', 'https://sandbox.lenco.co/access/v1'),
+    // Switch LENCO_BASE_URL to https://api.lenco.co/access/v1 for production
+    'debit_account_id' => env('LENCO_DEBIT_ACCOUNT_ID'), // the Lenco account to pay FROM
+    'webhook_secret'    => env('LENCO_WEBHOOK_SECRET'),
+],

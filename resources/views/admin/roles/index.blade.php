@@ -1,45 +1,47 @@
 <x-app-layout>
     <x-slot name="header">
-        <div class="flex justify-between items-center">
-            <h2 class="font-semibold text-xl text-gray-800 leading-tight">{{ __('Role Management') }}</h2>
-            <a href="{{ route('admin.roles.create') }}" class="inline-flex items-center px-4 py-2 bg-gray-800 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-gray-700">
-                {{ __('Add Role') }}
-            </a>
-        </div>
+        <div class="text-[11px] uppercase tracking-wide text-muted-500">{{ __('Role Management') }}</div>
     </x-slot>
 
-    <div class="py-12">
-        <div class="max-w-7xl mx-auto sm:px-6 lg:px-8 space-y-4">
-            @if (session('status'))
-                <div class="p-4 bg-green-50 text-green-800 rounded-md text-sm">{{ session('status') }}</div>
-            @endif
+    <div class="space-y-4">
+        <div class="flex justify-between items-center flex-wrap gap-3">
+            <h1 class="text-xl">{{ __('Roles') }}</h1>
+            <a href="{{ route('admin.roles.create') }}" class="btn btn-primary">
+                <i class="ph ph-plus"></i>{{ __('Add Role') }}
+            </a>
+        </div>
 
-            @if (session('error'))
-                <div class="p-4 bg-red-50 text-red-800 rounded-md text-sm">{{ session('error') }}</div>
-            @endif
+        @if (session('status'))
+            <div class="card elev-sm p-3 text-sm text-accent-300">{{ session('status') }}</div>
+        @endif
 
-            <div class="bg-white shadow sm:rounded-lg p-4 sm:p-6">
-                <table class="min-w-full divide-y divide-gray-200 text-sm">
+        @if (session('error'))
+            <div class="card elev-sm p-3 text-sm text-danger">{{ session('error') }}</div>
+        @endif
+
+        <div class="card elev-sm p-4 sm:p-6">
+            <div class="overflow-x-auto">
+                <table class="table">
                     <thead>
-                        <tr class="text-left text-gray-500 uppercase text-xs">
-                            <th class="py-2 pr-4">{{ __('Role') }}</th>
-                            <th class="py-2 pr-4">{{ __('Permissions') }}</th>
-                            <th class="py-2 pr-4">{{ __('Users') }}</th>
-                            <th class="py-2 pr-4">{{ __('Actions') }}</th>
+                        <tr>
+                            <th>{{ __('Role') }}</th>
+                            <th>{{ __('Permissions') }}</th>
+                            <th>{{ __('Users') }}</th>
+                            <th>{{ __('Actions') }}</th>
                         </tr>
                     </thead>
-                    <tbody class="divide-y divide-gray-100">
+                    <tbody>
                         @foreach ($roles as $role)
                             <tr>
-                                <td class="py-2 pr-4">{{ $role->name }}</td>
-                                <td class="py-2 pr-4">{{ $role->permissions_count }}</td>
-                                <td class="py-2 pr-4">{{ $role->users_count }}</td>
-                                <td class="py-2 pr-4 space-x-2 whitespace-nowrap">
-                                    <a href="{{ route('admin.roles.edit', $role) }}" class="text-indigo-600 hover:underline">{{ __('Edit') }}</a>
+                                <td>{{ $role->name }}</td>
+                                <td>{{ $role->permissions_count }}</td>
+                                <td>{{ $role->users_count }}</td>
+                                <td class="space-x-1 whitespace-nowrap">
+                                    <a href="{{ route('admin.roles.edit', $role) }}" class="btn btn-ghost">{{ __('Edit') }}</a>
                                     <form method="POST" action="{{ route('admin.roles.destroy', $role) }}" class="inline" onsubmit="return confirm('{{ __('Delete this role?') }}')">
                                         @csrf
                                         @method('delete')
-                                        <button type="submit" class="text-red-600 hover:underline">{{ __('Delete') }}</button>
+                                        <button type="submit" class="btn btn-danger">{{ __('Delete') }}</button>
                                     </form>
                                 </td>
                             </tr>
@@ -48,5 +50,9 @@
                 </table>
             </div>
         </div>
+
+        <a href="{{ route('admin.permissions.index') }}" class="btn btn-ghost">
+            <i class="ph ph-shield-check"></i>{{ __('View Permission Matrix') }}
+        </a>
     </div>
 </x-app-layout>

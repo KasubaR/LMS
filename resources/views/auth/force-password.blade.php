@@ -1,5 +1,5 @@
 <x-guest-layout>
-    <div class="mb-4 text-sm text-gray-600">
+    <div class="mb-4 text-sm text-ink/70">
         {{ __('For security, you must set a new password before continuing.') }}
     </div>
 

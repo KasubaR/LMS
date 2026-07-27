@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\Admin\PermissionController;
 use App\Http\Controllers\Admin\RoleController;
+use App\Http\Controllers\Admin\SettingController;
 use App\Http\Controllers\Admin\UserController;
 use Illuminate\Support\Facades\Route;
 
@@ -22,5 +23,8 @@ Route::middleware(['auth', 'must_change_password'])
         Route::middleware('role:Super Admin')->group(function () {
             Route::resource('roles', RoleController::class)->except(['show']);
             Route::get('permissions', [PermissionController::class, 'index'])->name('permissions.index');
+
+            Route::get('settings', [SettingController::class, 'edit'])->name('settings.edit');
+            Route::put('settings', [SettingController::class, 'update'])->name('settings.update');
         });
     });

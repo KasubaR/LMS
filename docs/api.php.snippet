@@ -1,0 +1,17 @@
+<?php
+// Add these to routes/api.php (or routes/web.php if not using API middleware)
+
+use App\Http\Controllers\PayoutController;
+use App\Http\Controllers\LencoWebhookController;
+use Illuminate\Support\Facades\Route;
+
+// Protect these with your auth middleware (e.g. 'auth:sanctum')
+Route::middleware(['auth:sanctum'])->group(function () {
+    Route::get('/payouts', [PayoutController::class, 'index']);
+    Route::post('/payouts', [PayoutController::class, 'store']);
+    Route::post('/payouts/{payout}/refresh', [PayoutController::class, 'refreshStatus']);
+});
+
+// Public endpoint — Lenco calls this from their servers, not the browser.
+// Exclude it from CSRF verification (it's already outside 'web' middleware here).
+Route::post('/webhooks/lenco', LencoWebhookController::class);

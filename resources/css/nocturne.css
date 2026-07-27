@@ -1,0 +1,473 @@
+/* Nocturne — design-system tokens and component classes. This file is the source of truth for the system's look; retune it here and see design/_ds/.../readme.md.
+   Light is the default (:root / [data-theme="light"]). Dark tokens live under [data-theme="dark"]. */
+
+@font-face {
+  font-family: "Satoshi";
+  src: url("/fonts/satoshi/Satoshi-Variable.woff2") format("woff2"),
+       url("/fonts/satoshi/Satoshi-Variable.woff") format("woff");
+  font-weight: 300 900;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Satoshi";
+  src: url("/fonts/satoshi/Satoshi-VariableItalic.woff2") format("woff2"),
+       url("/fonts/satoshi/Satoshi-VariableItalic.woff") format("woff");
+  font-weight: 300 900;
+  font-style: italic;
+  font-display: swap;
+}
+
+:root,
+[data-theme="light"] {
+  --color-bg: #ffffff;
+  --color-surface: #f3f5f9;
+  --color-text: #1a1d27;
+  --color-accent: oklch(45% 0.12 155);
+  --color-accent-2: oklch(52% 0.10 155);
+  --color-divider: color-mix(in srgb, #1a1d27 12%, transparent);
+
+  --color-neutral-100: #f7f8fc;
+  --color-neutral-200: #e8ebf4;
+  --color-neutral-300: #d0d5e4;
+  --color-neutral-400: #a8aec2;
+  --color-neutral-500: #7e8499;
+  --color-neutral-600: #5f6578;
+  --color-neutral-700: #454a5a;
+  --color-neutral-800: #2e3240;
+  --color-neutral-900: #1a1d27;
+
+  --color-accent-100: oklch(96% 0.04 155);
+  --color-accent-200: oklch(91% 0.07 155);
+  --color-accent-300: oklch(84% 0.10 155);
+  --color-accent-400: oklch(75% 0.13 155);
+  --color-accent-500: oklch(67% 0.15 155);
+  --color-accent-600: oklch(57% 0.14 155);
+  --color-accent-700: oklch(46% 0.12 155);
+  --color-accent-800: oklch(34% 0.09 155);
+  --color-accent-900: oklch(24% 0.06 155);
+
+  --color-accent-2-100: oklch(96% 0.03 155);
+  --color-accent-2-200: oklch(91% 0.05 155);
+  --color-accent-2-300: oklch(84% 0.08 155);
+  --color-accent-2-400: oklch(75% 0.10 155);
+  --color-accent-2-500: oklch(67% 0.12 155);
+  --color-accent-2-600: oklch(57% 0.11 155);
+  --color-accent-2-700: oklch(46% 0.09 155);
+  --color-accent-2-800: oklch(34% 0.07 155);
+  --color-accent-2-900: oklch(24% 0.05 155);
+
+  --color-section: oklch(96% 0.03 155);
+  --color-section-glow: oklch(88% 0.06 155);
+  --color-section-ghost: oklch(78% 0.08 155);
+
+  --color-danger: oklch(50% 0.18 25);
+  --color-danger-bg: oklch(95% 0.03 25);
+  --color-danger-ink: oklch(42% 0.16 25);
+
+  --font-heading: "Satoshi", system-ui, sans-serif;
+  --font-heading-weight: 500;
+  --font-body: "Satoshi", system-ui, sans-serif;
+
+  --space-1: 2.8px;
+  --space-2: 5.6px;
+  --space-3: 8.4px;
+  --space-4: 11.2px;
+  --space-6: 16.8px;
+  --space-8: 22.4px;
+
+  --radius-sm: 4px;
+  --radius-md: 8px;
+  --radius-lg: 14px;
+
+  --shadow-sm: 0 0 0 1px color-mix(in srgb, #1a1d27 10%, transparent), 0 1px 2px rgba(26, 29, 39, 0.04);
+  --shadow-md: 0 0 0 1px color-mix(in srgb, #1a1d27 10%, transparent), 0 6px 18px rgba(26, 29, 39, 0.08);
+  --shadow-lg: 0 0 0 1px color-mix(in srgb, #1a1d27 12%, transparent), 0 16px 40px rgba(26, 29, 39, 0.12);
+}
+
+[data-theme="dark"] {
+  --color-bg: #161826;
+  --color-surface: #232532;
+  --color-text: #e9e9ed;
+  --color-accent: oklch(70% 0.15 155);
+  --color-accent-2: oklch(76% 0.12 155);
+  --color-divider: color-mix(in srgb, #e9e9ed 16%, transparent);
+
+  --color-neutral-100: #f3f5fe;
+  --color-neutral-200: #e4e7f5;
+  --color-neutral-300: #cfd3e5;
+  --color-neutral-400: #b2b6ca;
+  --color-neutral-500: #9397ab;
+  --color-neutral-600: #75798c;
+  --color-neutral-700: #595d6c;
+  --color-neutral-800: #3f424d;
+  --color-neutral-900: #292b31;
+
+  --color-accent-100: oklch(96% 0.04 155);
+  --color-accent-200: oklch(91% 0.07 155);
+  --color-accent-300: oklch(84% 0.10 155);
+  --color-accent-400: oklch(75% 0.13 155);
+  --color-accent-500: oklch(67% 0.15 155);
+  --color-accent-600: oklch(57% 0.14 155);
+  --color-accent-700: oklch(46% 0.12 155);
+  --color-accent-800: oklch(34% 0.09 155);
+  --color-accent-900: oklch(24% 0.06 155);
+
+  --color-accent-2-100: oklch(96% 0.03 155);
+  --color-accent-2-200: oklch(91% 0.05 155);
+  --color-accent-2-300: oklch(84% 0.08 155);
+  --color-accent-2-400: oklch(75% 0.10 155);
+  --color-accent-2-500: oklch(67% 0.12 155);
+  --color-accent-2-600: oklch(57% 0.11 155);
+  --color-accent-2-700: oklch(46% 0.09 155);
+  --color-accent-2-800: oklch(34% 0.07 155);
+  --color-accent-2-900: oklch(24% 0.05 155);
+
+  --color-section: oklch(24% 0.06 155);
+  --color-section-glow: oklch(32% 0.09 155);
+  --color-section-ghost: oklch(45% 0.10 155);
+
+  --color-danger: oklch(65% 0.18 25);
+  --color-danger-bg: oklch(30% 0.10 25);
+  --color-danger-ink: oklch(88% 0.07 25);
+
+  --shadow-sm: 0 0 0 1px #3f424d;
+  --shadow-md: 0 0 0 1px #595d6c, 0 6px 18px rgba(0,0,0,0.55);
+  --shadow-lg: 0 0 0 1px #9397ab, 0 16px 40px rgba(0,0,0,0.65);
+}
+
+body {
+  background: var(--color-bg);
+  color: var(--color-text);
+  font-family: var(--font-body);
+}
+h1, h2, h3, h4 { font-family: var(--font-heading); font-weight: var(--font-heading-weight); }
+
+.lighten {
+  mix-blend-mode: multiply;
+  background-color: transparent;
+}
+[data-theme="dark"] .lighten {
+  mix-blend-mode: lighten;
+}
+
+.hover-surface:hover {
+  background: color-mix(in srgb, var(--color-text) 5%, transparent);
+}
+
+/* ══════════════════════════════════════════════════════════════════════════
+   Components — built with the tokens above. Plain CSS
+   on plain HTML: no JavaScript, no build step. Each class is documented in
+   readme.md and demonstrated in foundations/ and components/.
+   ══════════════════════════════════════════════════════════════════════ */
+
+*, *::before, *::after { box-sizing: border-box; }
+body { margin: 0; font-size: 15px; line-height: 1.55; font-weight: 400; }
+h1, h2, h3, h4, h5, h6 {
+  font-family: var(--font-heading); font-weight: var(--font-heading-weight);
+  line-height: 1.12; letter-spacing: -0.015em; margin: 0 0 var(--space-2);
+}
+h1 { font-size: 42px; }
+h2 { font-size: 32px; }
+h3 { font-size: 25px; }
+h4 { font-size: 20px; }
+h5 { font-size: 16px; }
+h6 { font-size: 13px; }
+h6 { letter-spacing: 0.08em; text-transform: uppercase; }
+p { margin: 0 0 var(--space-3); }
+a { color: var(--color-accent); text-underline-offset: 3px; }
+img { display: block; max-width: 100%; }
+figure { margin: 0; }
+figcaption {
+  font-size: 11px; margin-top: var(--space-1);
+  color: color-mix(in srgb, var(--color-text) 55%, transparent);
+}
+.text-muted { color: color-mix(in srgb, var(--color-text) 55%, transparent); }
+[x-cloak] { display: none !important; }
+:focus { outline: none; }
+:focus-visible { outline: 2px solid var(--color-accent); outline-offset: 2px; }
+::selection { background: color-mix(in srgb, var(--color-accent) 30%, transparent); }
+
+/* — rules — */
+.hr {
+  height: 1px; border: 0; margin: var(--space-4) 0;
+  background: linear-gradient(to right,
+    transparent, var(--color-divider) 48px,
+    var(--color-divider) calc(100% - 48px), transparent);
+}
+
+/* — buttons — */
+.btn {
+  display: inline-flex; align-items: center; justify-content: center; gap: 6px;
+  cursor: pointer; text-decoration: none;
+  font-family: var(--font-heading); font-weight: var(--font-heading-weight);
+  font-size: 14px; line-height: 1.2; color: var(--color-text);
+  background: transparent; border: 1px solid transparent;
+  padding: var(--space-2) calc(var(--space-3) * 1.2);
+  border-radius: var(--radius-md);
+}
+.btn svg { display: block; }
+.btn:disabled { opacity: 0.45; cursor: not-allowed; }
+.btn-primary { color: var(--color-accent); border-color: var(--color-accent); }
+.btn-primary:hover { background: color-mix(in srgb, var(--color-accent) 12%, transparent); }
+.btn-primary:active { background: color-mix(in srgb, var(--color-accent) 22%, transparent); }
+.btn-secondary { border-color: var(--color-divider); }
+.btn-secondary:hover { background: color-mix(in srgb, var(--color-text) 7%, transparent); }
+.btn-secondary:active { background: color-mix(in srgb, var(--color-text) 14%, transparent); }
+.btn-ghost { color: var(--color-accent); padding-inline: var(--space-1); }
+.btn-ghost:hover { background: color-mix(in srgb, var(--color-accent) 10%, transparent); }
+.btn-ghost:active { background: color-mix(in srgb, var(--color-accent) 18%, transparent); }
+.btn-danger { color: var(--color-danger); border-color: var(--color-danger); }
+.btn-danger:hover { background: color-mix(in srgb, var(--color-danger) 12%, transparent); }
+.btn-danger:active { background: color-mix(in srgb, var(--color-danger) 22%, transparent); }
+.btn-icon { width: 36px; height: 36px; padding: 0; }
+.btn-block { width: 100%; margin-top: var(--space-2); }
+
+/* — forms — */
+.field > label {
+  display: block; font-size: 12px; margin-bottom: 5px;
+  color: color-mix(in srgb, var(--color-text) 70%, transparent);
+}
+.input {
+  width: 100%; min-height: 36px; padding: 6px 10px; font: inherit;
+  font-size: 14px; color: var(--color-text); caret-color: var(--color-accent);
+  background: var(--color-surface);
+  border: 1px solid var(--color-divider); border-radius: var(--radius-md);
+}
+.input:hover { border-color: color-mix(in srgb, var(--color-text) 45%, transparent); }
+.input:focus-visible { border-color: var(--color-accent); outline-offset: 0; }
+.input.has-error { border-color: var(--color-danger); }
+textarea.input { min-height: 90px; resize: vertical; }
+.radio { display: inline-flex; align-items: center; gap: 8px; cursor: pointer; font-size: 14px; }
+.radio input, .seg-opt input {
+  position: absolute; opacity: 0; width: 0; height: 0; pointer-events: none;
+}
+.radio .dot {
+  width: 16px; height: 16px; flex: none; border-radius: 50%;
+  border: 1.5px solid var(--color-divider);
+}
+.radio:hover .dot { border-color: var(--color-accent); }
+.radio input:checked + .dot {
+  border-color: var(--color-accent); background: var(--color-accent);
+  box-shadow: inset 0 0 0 4px var(--color-bg);
+}
+.radio input:focus-visible + .dot { outline: 2px solid var(--color-accent); outline-offset: 2px; }
+.seg {
+  display: inline-flex; overflow: hidden;
+  border: 1px solid var(--color-divider); border-radius: var(--radius-md);
+}
+.seg-opt {
+  display: inline-flex; align-items: center; gap: 6px;
+  padding: 7px 12px; font-size: 13px; cursor: pointer;
+}
+.seg-opt + .seg-opt { border-left: 1px solid var(--color-divider); }
+.seg-opt:first-child { border-radius: var(--radius-md) 0 0 var(--radius-md); }
+.seg-opt:last-child  { border-radius: 0 var(--radius-md) var(--radius-md) 0; }
+.seg-opt:only-child  { border-radius: var(--radius-md); }
+.seg-opt:has(input:checked) { color: var(--color-accent); box-shadow: inset 0 0 0 1px var(--color-accent); }
+.seg-opt:not(:has(input:checked)):hover { background: color-mix(in srgb, var(--color-text) 7%, transparent); }
+.seg-opt:has(input:focus-visible) { outline: 2px solid var(--color-accent); outline-offset: -2px; }
+
+/* — cards — */
+.card {
+  display: flex; flex-direction: column; gap: var(--space-2);
+  padding: var(--space-3); border-radius: var(--radius-md); background: var(--color-surface);
+}
+.card-kicker { font-size: 10px; letter-spacing: 0.1em; text-transform: uppercase; color: var(--color-accent); }
+.card-title {
+  font-family: var(--font-heading); font-weight: var(--font-heading-weight);
+  font-size: 17px; line-height: 1.2;
+}
+.card-body { margin: 0; font-size: 13px; opacity: 0.8; flex: 1; }
+.card-meta {
+  display: flex; align-items: center; gap: 6px; font-size: 11px;
+  color: color-mix(in srgb, var(--color-text) 50%, transparent);
+}
+.elev-sm { box-shadow: var(--shadow-sm); }
+.elev-md { box-shadow: var(--shadow-md); }
+.elev-lg { box-shadow: var(--shadow-lg); }
+
+/* — tags — */
+.tag {
+  display: inline-flex; align-items: center; font-size: 11px;
+  letter-spacing: 0.02em; padding: 3px 10px;
+  border-radius: calc(var(--radius-md) * 0.75);
+}
+.tag-accent { background: var(--color-accent-800); color: var(--color-accent-100); }
+.tag-accent-2 { background: var(--color-accent-2-800); color: var(--color-accent-2-100); }
+.tag-neutral { background: var(--color-neutral-800); color: var(--color-neutral-100); }
+.tag-outline { border: 1px solid var(--color-accent); color: var(--color-accent); }
+.tag-danger { background: var(--color-danger-bg); color: var(--color-danger-ink); }
+
+/* — navigation — */
+.nav {
+  display: flex; align-items: center; gap: var(--space-4);
+  padding: var(--space-3) var(--space-4);
+  border-bottom: none;
+}
+.nav-brand {
+  font-family: var(--font-heading); font-weight: var(--font-heading-weight);
+  font-size: 18px; margin-right: auto;
+}
+.nav a { color: inherit; text-decoration: none; font-size: 14px; }
+.nav a:hover, .nav a[aria-current='page'] { color: var(--color-accent); }
+
+/* — tables — */
+.table { width: 100%; border-collapse: collapse; font-size: 14px; }
+.table th {
+  text-align: left; font-size: 11px; letter-spacing: 0.08em; text-transform: uppercase;
+  color: color-mix(in srgb, var(--color-text) 60%, transparent);
+  padding: var(--space-2); border-bottom: 1px solid transparent;
+}
+.table td {
+  padding: var(--space-2);
+  border-bottom: 1px solid transparent;
+}
+.table thead tr {
+  background: linear-gradient(to right,
+    transparent, var(--color-divider) 48px,
+    var(--color-divider) calc(100% - 48px), transparent) no-repeat bottom / 100% 1px;
+}
+.table tbody tr {
+  background: linear-gradient(to right,
+    transparent, color-mix(in srgb, var(--color-text) 8%, transparent) 48px,
+    color-mix(in srgb, var(--color-text) 8%, transparent) calc(100% - 48px), transparent) no-repeat bottom / 100% 1px;
+}
+.table tbody tr:hover {
+  background:
+    linear-gradient(color-mix(in srgb, var(--color-text) 4%, transparent),
+                    color-mix(in srgb, var(--color-text) 4%, transparent)) no-repeat 0 0 / 100% 100%,
+    linear-gradient(to right,
+      transparent, color-mix(in srgb, var(--color-text) 8%, transparent) 48px,
+      color-mix(in srgb, var(--color-text) 8%, transparent) calc(100% - 48px), transparent) no-repeat bottom / 100% 1px;
+}
+
+/* — dialog — */
+.dialog-backdrop {
+  position: fixed; inset: 0; display: grid; place-items: center;
+  padding: var(--space-4);
+  background: color-mix(in srgb, var(--color-neutral-900) 50%, transparent);
+}
+.dialog {
+  width: min(440px, 100%); display: flex; flex-direction: column; gap: var(--space-3);
+  padding: var(--space-4); border-radius: var(--radius-lg);
+  background: var(--color-surface); box-shadow: var(--shadow-lg);
+}
+.dialog-title {
+  font-family: var(--font-heading); font-weight: var(--font-heading-weight);
+  font-size: 20px;
+}
+.dialog-body { font-size: 14px; opacity: 0.85; }
+.dialog-actions { display: flex; justify-content: flex-end; gap: var(--space-2); margin-top: var(--space-2); }
+
+/* — auth shell (login / password flows) — */
+.auth-shell {
+  position: relative;
+  min-height: 100vh;
+  display: grid;
+  place-items: center;
+  padding: 32px 20px;
+  background:
+    radial-gradient(ellipse 70% 55% at 50% -10%,
+      color-mix(in srgb, var(--color-section-glow) 45%, transparent),
+      transparent 70%),
+    var(--color-bg);
+}
+.auth-shell__main {
+  position: relative;
+  z-index: 1;
+  width: min(400px, 100%);
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+.auth-brand {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  gap: 12px;
+}
+.auth-brand__mark {
+  width: 48px; height: 48px;
+  display: grid; place-items: center;
+  border-radius: var(--radius-md);
+  font-size: 24px;
+  color: #ffffff;
+  background: var(--color-accent-800);
+}
+.auth-brand__name {
+  margin: 0;
+  font-family: var(--font-heading);
+  font-weight: var(--font-heading-weight);
+  font-size: 24px;
+  line-height: 1.2;
+  letter-spacing: -0.02em;
+}
+.auth-brand__tag {
+  margin: 4px 0 0;
+  font-size: 13px;
+  color: color-mix(in srgb, var(--color-text) 55%, transparent);
+}
+.auth-panel {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-6);
+  padding: 28px 24px;
+  border-radius: var(--radius-lg);
+  background: var(--color-surface);
+  box-shadow: var(--shadow-md);
+}
+.auth-form__header h1 {
+  margin: 0;
+  font-size: 18px;
+  letter-spacing: -0.015em;
+}
+.auth-form__header p {
+  margin: 6px 0 0;
+  font-size: 13px;
+  color: color-mix(in srgb, var(--color-text) 55%, transparent);
+}
+.auth-form {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-6);
+}
+.auth-form .field { display: flex; flex-direction: column; }
+.auth-form__row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+.auth-check {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  cursor: pointer;
+  font-size: 13px;
+  color: color-mix(in srgb, var(--color-text) 75%, transparent);
+  user-select: none;
+}
+.auth-check input {
+  width: 15px; height: 15px; margin: 0;
+  accent-color: var(--color-accent);
+  cursor: pointer;
+}
+.auth-link {
+  font-size: 13px;
+  color: color-mix(in srgb, var(--color-text) 60%, transparent);
+  text-decoration: none;
+}
+.auth-link:hover { color: var(--color-accent); }
+.auth-form .btn-block { margin-top: 4px; min-height: 40px; }
+
+.auth-theme-toggle {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  z-index: 2;
+}
