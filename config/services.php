@@ -35,4 +35,10 @@ return [
         ],
     ],
 
+    'lenco' => [
+        'secret_key' => env('LENCO_SECRET_KEY'),
+        'base_url' => env('LENCO_BASE_URL', 'https://api.lenco.co/access/v2'),
+        'default_bearer' => env('LENCO_DEFAULT_BEARER', 'merchant'),
+    ],
+
 ];

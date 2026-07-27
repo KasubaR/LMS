@@ -37,3 +37,4 @@ require __DIR__.'/customers.php';
 require __DIR__.'/loans.php';
 require __DIR__.'/payments.php';
 require __DIR__.'/reports.php';
+require __DIR__.'/lenco.php';

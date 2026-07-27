@@ -154,6 +154,8 @@
             @include('loans.partials.installments', ['loan' => $loan])
         </div>
 
+        @include('loans.partials.lenco-collections', ['loan' => $loan])
+
         <div>
             <a href="{{ route('loans.index') }}" class="text-sm text-ink/70 hover:text-ink">{{ __('← Back to loans') }}</a>
         </div>

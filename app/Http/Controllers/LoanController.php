@@ -118,7 +118,7 @@ class LoanController extends Controller
 
     public function show(Loan $loan): View
     {
-        $loan->load(['customer', 'loanOfficer', 'installments', 'approvedBy']);
+        $loan->load(['customer', 'loanOfficer', 'installments', 'approvedBy', 'lencoCollectionRequests']);
 
         if (in_array($loan->status, [Loan::STATUS_ACTIVE, Loan::STATUS_OVERDUE], true)) {
             $this->penalties->refreshLoan($loan);

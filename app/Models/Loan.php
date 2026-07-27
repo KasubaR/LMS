@@ -165,6 +165,11 @@ class Loan extends Model
         return $this->hasMany(Payment::class);
     }
 
+    public function lencoCollectionRequests(): HasMany
+    {
+        return $this->hasMany(LencoCollectionRequest::class)->latest();
+    }
+
     public function acceptsPayments(): bool
     {
         return in_array($this->status, [self::STATUS_ACTIVE, self::STATUS_OVERDUE], true);
