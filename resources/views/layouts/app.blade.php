@@ -17,8 +17,8 @@
             @include('layouts.navigation')
 
             <div class="flex-1 min-w-0 flex flex-col lg:pl-0">
-                <header class="sticky top-0 z-10 h-16 flex-none flex items-center justify-between gap-4 px-6 border-b border-divider bg-bg">
-                    <div class="flex items-center gap-3 min-w-0">
+                <header class="sticky top-0 z-10 h-16 flex-none flex items-center justify-between gap-2 sm:gap-4 px-3 sm:px-6 border-b border-divider bg-bg">
+                    <div class="flex items-center gap-2 sm:gap-3 min-w-0">
                         <button class="lg:hidden btn btn-secondary btn-icon" @click="sidebarOpen = !sidebarOpen" aria-label="{{ __('Toggle menu') }}">
                             <i class="ph ph-list text-lg"></i>
                         </button>
@@ -27,7 +27,7 @@
                         </div>
                     </div>
 
-                    <div class="flex items-center gap-3 flex-none min-w-0">
+                    <div class="flex items-center gap-2 sm:gap-3 flex-none min-w-0">
                         <x-global-search />
 
                         <x-theme-toggle />

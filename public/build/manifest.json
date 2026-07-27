@@ -32,7 +32,7 @@
     "src": "node_modules/@phosphor-icons/web/src/regular/Phosphor.woff2"
   },
   "resources/css/app-form.css": {
-    "file": "assets/app-form-DPLfU64W.css",
+    "file": "assets/app-form-fiNSDDim.css",
     "name": "app-form",
     "names": [
       "app-form.css"
@@ -41,7 +41,7 @@
     "isEntry": true
   },
   "resources/css/app.css": {
-    "file": "assets/app-DdRZ0Pn2.css",
+    "file": "assets/app-CVvN_ynf.css",
     "name": "app",
     "names": [
       "app.css"

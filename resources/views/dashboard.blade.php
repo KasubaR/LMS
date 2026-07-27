@@ -81,7 +81,7 @@
 
         <div>
             <div class="text-[11px] uppercase tracking-wide text-muted-500 mb-3">{{ __('Charts') }}</div>
-            <div class="grid gap-4" style="grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));">
+            <div class="grid gap-4" style="grid-template-columns: repeat(auto-fit, minmax(min(320px, 100%), 1fr));">
                 <div class="card elev-sm p-4">
                     <h3 class="mb-2">{{ __('Monthly Lending') }}</h3>
                     <div style="height: 260px;">
@@ -115,7 +115,7 @@
             </div>
         </div>
 
-        <div class="grid gap-6 items-start" style="grid-template-columns: minmax(0,1fr) 360px;">
+        <div class="dashboard-split items-start">
 
             <div class="flex flex-col gap-6 min-w-0">
 

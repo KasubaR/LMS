@@ -287,6 +287,19 @@
   gap: 20px;
 }
 
+/* —— Dashboard split layout —— */
+.dashboard-split {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  gap: 24px;
+}
+
+@media (min-width: 1024px) {
+  .dashboard-split {
+    grid-template-columns: minmax(0, 1fr) 360px;
+  }
+}
+
 /* —— Global header search —— */
 .global-search {
   position: relative;
