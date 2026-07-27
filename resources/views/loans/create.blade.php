@@ -7,7 +7,7 @@
         <div class="app-form-page__intro">
             <h1 class="app-form-page__title">{{ __('New loan') }}</h1>
             <p class="app-form-page__sub">
-                {{ __('Set the terms and watch the repayment schedule update live. The loan is saved as a draft until you submit it for approval.') }}
+                {{ __('Set the terms and watch the repayment schedule update live. Saving activates the loan immediately.') }}
             </p>
         </div>
 

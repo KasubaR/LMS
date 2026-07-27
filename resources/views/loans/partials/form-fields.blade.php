@@ -283,7 +283,7 @@
                 <a href="{{ route('loans.index') }}" class="btn btn-ghost">{{ __('Cancel') }}</a>
                 <button type="submit" class="btn btn-primary">
                     <i class="ph ph-floppy-disk" aria-hidden="true"></i>
-                    {{ __('Create draft') }}
+                    {{ __('Create loan') }}
                 </button>
             @endif
         </div>
@@ -311,7 +311,7 @@
 
         <p class="app-form__preview-error" x-show="error" x-text="error" x-cloak></p>
         <p class="app-form__preview-note">
-            {{ __('Updates as you change terms. The draft schedule is generated when you save.') }}
+            {{ __('Updates as you change terms. The schedule is generated when you save.') }}
         </p>
     </aside>
 </div>
