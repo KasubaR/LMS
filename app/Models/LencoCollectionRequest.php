@@ -37,14 +37,12 @@ class LencoCollectionRequest extends Model
 
     public const OPERATOR_AIRTEL = 'airtel';
 
-    public const OPERATOR_ZAMTEL = 'zamtel';
-
     /**
      * @return list<string>
      */
     public static function operators(): array
     {
-        return [self::OPERATOR_MTN, self::OPERATOR_AIRTEL, self::OPERATOR_ZAMTEL];
+        return [self::OPERATOR_MTN, self::OPERATOR_AIRTEL];
     }
 
     protected function casts(): array
@@ -95,7 +93,6 @@ class LencoCollectionRequest extends Model
         return match ($this->operator) {
             self::OPERATOR_MTN => 'MTN',
             self::OPERATOR_AIRTEL => 'Airtel',
-            self::OPERATOR_ZAMTEL => 'Zamtel',
             default => ucfirst($this->operator),
         };
     }

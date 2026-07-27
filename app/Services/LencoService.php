@@ -56,7 +56,7 @@ class LencoService
      * either immediately (rare) or later via the Lenco webhook.
      *
      * @param  string  $phone  Customer phone number, e.g. "0971234567"
-     * @param  string  $operator  "mtn" | "airtel" | "zamtel"
+     * @param  string  $operator  "mtn" | "airtel"
      * @param  float  $amount  Amount in ZMW
      * @param  string  $reference  Unique reference for this collection request
      */
