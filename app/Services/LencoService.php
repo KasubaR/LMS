@@ -81,16 +81,12 @@ class LencoService
 
     /**
      * Re-check a collection's status using our own reference.
-     *
-     * NOTE: Lenco's docs don't spell out a dedicated "collection by reference"
-     * path alongside /collections/mobile-money. This mirrors their documented
-     * transaction-lookup pattern (/transaction-by-reference/{reference}) since
-     * collections are represented as transactions in their schema. Verify this
-     * path against the real sandbox response before relying on it in production.
+     * GET /collections/status/{reference} — confirmed endpoint (lenco-api.readme.io/v2.0),
+     * distinct from the generic bank-transaction lookup at /transaction-by-reference.
      */
     public function getTransactionStatus(string $reference): array
     {
-        $response = $this->client()->get("/transaction-by-reference/{$reference}");
+        $response = $this->client()->get("/collections/status/{$reference}");
 
         return $this->handleResponse($response);
     }
